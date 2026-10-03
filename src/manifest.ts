@@ -19,7 +19,7 @@ export const MANIFEST: ManifestItem[] = [
   { id: 'linesman-pliers',     name: 'Linesman Pliers',       category: 'tools', src: './assets/tools/linesman-pliers.png?v=3',    realWidth: 3,   realHeight: 9,  anchorX: 1.5,  anchorY: 0.3 },
 
   // ─── Power Tools (sideways hanging profile) ───
-  { id: 'cordless-drill',  name: 'Cordless Drill',  category: 'power-tools', src: './assets/power-tools/cordless-drill.png?v=3', realWidth: 10, realHeight: 6,   anchorX: 1.5, anchorY: 0.4 },
+  { id: 'cordless-drill',  name: 'Cordless Drill',  category: 'power-tools', src: './assets/power-tools/cordless-drill.png?v=3', realWidth: 9, realHeight: 9,   anchorX: 3, anchorY: 1 },
   { id: 'circular-saw',    name: 'Circular Saw',    category: 'power-tools', src: './assets/power-tools/circular-saw.png?v=3',   realWidth: 10, realHeight: 5,   anchorX: 5.0, anchorY: 0.4 },
   { id: 'orbit-sander',    name: 'Orbital Sander',  category: 'power-tools', src: './assets/power-tools/orbit-sander.png?v=3',   realWidth: 8,  realHeight: 5,   anchorX: 4.0, anchorY: 0.3 },
   { id: 'impact-driver',   name: 'Impact Driver',   category: 'power-tools', src: './assets/power-tools/impact-driver.png?v=3',  realWidth: 9,  realHeight: 5.5, anchorX: 1.5, anchorY: 0.4 },
