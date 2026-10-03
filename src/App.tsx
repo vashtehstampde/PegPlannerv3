@@ -53,8 +53,10 @@ function App() {
     if (!area) return;
 
     const PADDING = 32;
-    const availW = area.clientWidth;
-    const availH = area.clientHeight;
+    const totalW = area.clientWidth + (PADDING * 2);
+    const totalH = area.clientHeight + (PADDING * 2);
+    const availW = totalW - (PADDING * 2);
+    const availH = totalH - (PADDING * 2);
 
     const fitZoom = Math.min(
       availW / (boardWIn * PPI_BASE),
@@ -65,7 +67,6 @@ function App() {
     const boardPxW = boardWIn * PPI_BASE * newZoom;
     const boardPxH = boardHIn * PPI_BASE * newZoom;
 
-    // Center within available space, THEN add padding to move it into the visual viewport
     const centerX = (availW - boardPxW) / 2 + PADDING;
     const centerY = (availH - boardPxH) / 2 + PADDING;
 
