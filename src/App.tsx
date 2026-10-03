@@ -52,23 +52,29 @@ function App() {
     const area = document.querySelector('.canvas-area') as HTMLElement;
     if (!area) return;
 
-    const PADDING = 32;
-    const totalW = area.clientWidth + (PADDING * 2);
-    const totalH = area.clientHeight + (PADDING * 2);
-    const availW = totalW - (PADDING * 2);
-    const availH = totalH - (PADDING * 2);
+    // Read actual padding from CSS
+    const style = getComputedStyle(area);
+    const padLeft = parseFloat(style.paddingLeft || '0');
+    const padRight = parseFloat(style.paddingRight || '0');
+    const padTop = parseFloat(style.paddingTop || '0');
+    const padBottom = parseFloat(style.paddingBottom || '0');
+
+    // Available space inside padding
+    const innerW = area.clientWidth - padLeft - padRight;
+    const innerH = area.clientHeight - padTop - padBottom;
 
     const fitZoom = Math.min(
-      availW / (boardWIn * PPI_BASE),
-      availH / (boardHIn * PPI_BASE)
+      innerW / (boardWIn * PPI_BASE),
+      innerH / (boardHIn * PPI_BASE)
     );
 
     const newZoom = clamp(fitZoom, 0.15, 5);
     const boardPxW = boardWIn * PPI_BASE * newZoom;
     const boardPxH = boardHIn * PPI_BASE * newZoom;
 
-    const centerX = (availW - boardPxW) / 2 + PADDING;
-    const centerY = (availH - boardPxH) / 2 + PADDING;
+    // Center inside available space, offset by top-left padding
+    const centerX = padLeft + (innerW - boardPxW) / 2;
+    const centerY = padTop + (innerH - boardPxH) / 2;
 
     setZoom(newZoom);
     setPanX(centerX);
