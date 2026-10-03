@@ -60,7 +60,7 @@ function App() {
     const padBottom = parseFloat(style.paddingBottom || '0');
 
     // Available space inside CSS padding, minus margin
-    const margin = 16;
+    const margin = 32;
     const innerW = area.clientWidth - padLeft - padRight - (margin * 2);
     const innerH = area.clientHeight - padTop - padBottom - (margin * 2);
 
