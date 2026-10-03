@@ -52,7 +52,7 @@ function App() {
     const area = document.querySelector('.canvas-area') as HTMLElement;
     if (!area) return;
 
-    // clientWidth/clientHeight already EXCLUDE padding
+    const PADDING = 32;
     const availW = area.clientWidth;
     const availH = area.clientHeight;
 
@@ -65,9 +65,9 @@ function App() {
     const boardPxW = boardWIn * PPI_BASE * newZoom;
     const boardPxH = boardHIn * PPI_BASE * newZoom;
 
-    // Center within the available space (no padding math needed)
-    const centerX = (availW - boardPxW) / 2;
-    const centerY = (availH - boardPxH) / 2;
+    // Center within available space, THEN add padding to move it into the visual viewport
+    const centerX = (availW - boardPxW) / 2 + PADDING;
+    const centerY = (availH - boardPxH) / 2 + PADDING;
 
     setZoom(newZoom);
     setPanX(centerX);
