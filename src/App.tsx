@@ -57,8 +57,8 @@ function App() {
     const newZoom = clamp(fitZoom, 0.15, 5);
     const boardPxW = boardWIn * PPI_BASE * newZoom;
     const boardPxH = boardHIn * PPI_BASE * newZoom;
-    const centerX = (availW - boardPxW) / 2;
-    const centerY = (availH - boardPxH) / 2;
+    const centerX = (area.clientWidth / 2) - (boardPxW / 2);
+    const centerY = (area.clientHeight / 2) - (boardPxH / 2);
     setZoom(newZoom);
     setPanX(centerX);
     setPanY(centerY);
