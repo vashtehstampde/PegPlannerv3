@@ -47,7 +47,6 @@ function App() {
   const boardHIn = boardSize.h * 12;
   const PPI_BASE = 72;
 
-  // ─── Fit to window ───
   const fitToWindow = useCallback(() => {
     const area = document.querySelector('.canvas-area') as HTMLElement;
     if (!area) return;
@@ -65,8 +64,8 @@ function App() {
     const boardPxW = boardWIn * PPI_BASE * newZoom;
     const boardPxH = boardHIn * PPI_BASE * newZoom;
 
-    const centerX = (area.clientWidth - boardPxW) / 2;
-    const centerY = (area.clientHeight - boardPxH) / 2;
+    const centerX = PADDING + (contentWidth - boardPxW) / 2;
+    const centerY = PADDING + (contentHeight - boardPxH) / 2;
 
     setZoom(newZoom);
     setPanX(centerX);
