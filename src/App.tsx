@@ -59,14 +59,10 @@ function App() {
     const padTop = parseFloat(style.paddingTop || '0');
     const padBottom = parseFloat(style.paddingBottom || '0');
 
-    // Available space inside CSS padding
-    let innerW = area.clientWidth - padLeft - padRight;
-    let innerH = area.clientHeight - padTop - padBottom;
-
-    // Add breathing room margin (16px on all sides)
+    // Available space inside CSS padding, minus margin
     const margin = 16;
-    innerW -= margin * 2;
-    innerH -= margin * 2;
+    const innerW = area.clientWidth - padLeft - padRight - (margin * 2);
+    const innerH = area.clientHeight - padTop - padBottom - (margin * 2);
 
     const fitZoom = Math.min(
       innerW / (boardWIn * PPI_BASE),
@@ -77,7 +73,7 @@ function App() {
     const boardPxW = boardWIn * PPI_BASE * newZoom;
     const boardPxH = boardHIn * PPI_BASE * newZoom;
 
-    // Center inside available space, offset by top-left padding + margin
+    // Center inside available space with margin offset
     const centerX = padLeft + margin + (innerW - boardPxW) / 2;
     const centerY = padTop + margin + (innerH - boardPxH) / 2;
 
@@ -86,21 +82,6 @@ function App() {
     setPanY(centerY);
   }, [boardWIn, boardHIn]);
 
-  // Auto-fit on board size change
-  useEffect(() => {
-    fitToWindow();
-  }, [boardSizeIdx, fitToWindow]);
-
-  // Auto-fit on initial mount and window resize
-  useEffect(() => {
-    const timer = setTimeout(fitToWindow, 100);
-    const onResize = () => fitToWindow();
-    window.addEventListener('resize', onResize);
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener('resize', onResize);
-    };
-  }, [fitToWindow]);
   // Auto-fit on board size change
   useEffect(() => {
     fitToWindow();
