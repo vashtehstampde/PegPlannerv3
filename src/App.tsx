@@ -54,9 +54,14 @@ function App() {
     const availW = area.clientWidth - 64;
     const availH = area.clientHeight - 64;
     const fitZoom = Math.min(availW / (boardWIn * PPI_BASE), availH / (boardHIn * PPI_BASE));
-    setZoom(clamp(fitZoom, 0.15, 5));
-    setPanX(0);
-    setPanY(0);
+    const newZoom = clamp(fitZoom, 0.15, 5);
+    const boardPxW = boardWIn * PPI_BASE * newZoom;
+    const boardPxH = boardHIn * PPI_BASE * newZoom;
+    const centerX = (availW - boardPxW) / 2;
+    const centerY = (availH - boardPxH) / 2;
+    setZoom(newZoom);
+    setPanX(centerX);
+    setPanY(centerY);
   }, [boardWIn, boardHIn]);
 
   // Auto-fit on board size change
