@@ -107,8 +107,8 @@ export function Board({
     if (!canvasAreaRef.current) return { col: 0, row: 0 };
     const rect = canvasAreaRef.current.getBoundingClientRect();
     // Account for padding (32px) and pan offset
-    const innerX = clientX - rect.left - 32 - panX;
-    const innerY = clientY - rect.top - 32 - panY;
+    const innerX = clientX - rect.left - panX;
+    const innerY = clientY - rect.top - panY;
     // Convert to inches
     const inchX = innerX / ppi;
     const inchY = innerY / ppi;
