@@ -118,16 +118,28 @@ export function Board({
     return { col, row };
   }, [panX, panY, ppi]);
 
-  // ─── Wheel zoom (scroll to zoom, no ctrl needed) ───
+   // ─── Wheel zoom (scroll to zoom, no ctrl needed) ───
   useEffect(() => {
     const el = canvasAreaRef.current;
     if (!el) return;
     const handler = (e: WheelEvent) => {
       e.preventDefault();
       if (e.ctrlKey || e.metaKey || Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-        // Zoom
-        const delta = e.deltaY > 0 ? 0.92 : 1.08;
-        onZoomChange(clamp(zoom * delta, 0.15, 5));
+        // Zoom with mouse anchor
+        const rect = el.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+        const zoomDelta = e.deltaY > 0 ? 0.92 : 1.08;
+        const newZoom = clamp(zoom * zoomDelta, 0.15, 5);
+        
+        // Adjust pan to keep mouse position under the same board point
+        const oldPpi = PPI_BASE * zoom;
+        const newPpi = PPI_BASE * newZoom;
+        const newPanX = mouseX - (mouseX - panX) * (newPpi / oldPpi);
+        const newPanY = mouseY - (mouseY - panY) * (newPpi / oldPpi);
+        
+        onZoomChange(newZoom);
+        onPanChange(newPanX, newPanY);
       } else {
         // Horizontal scroll = pan
         onPanChange(panX - e.deltaX, panY);
