@@ -51,14 +51,15 @@ function App() {
   const fitToWindow = useCallback(() => {
     const area = document.querySelector('.canvas-area') as HTMLElement;
     if (!area) return;
-    const availW = area.clientWidth - 64;
-    const availH = area.clientHeight - 64;
+    const PADDING = 32;
+    const availW = area.clientWidth - (PADDING * 2);
+    const availH = area.clientHeight - (PADDING * 2);
     const fitZoom = Math.min(availW / (boardWIn * PPI_BASE), availH / (boardHIn * PPI_BASE));
     const newZoom = clamp(fitZoom, 0.15, 5);
     const boardPxW = boardWIn * PPI_BASE * newZoom;
     const boardPxH = boardHIn * PPI_BASE * newZoom;
-    const centerX = (area.clientWidth / 2) - (boardPxW / 2);
-    const centerY = (area.clientHeight / 2) - (boardPxH / 2);
+    const centerX = PADDING + (availW - boardPxW) / 2;
+    const centerY = PADDING + (availH - boardPxH) / 2;
     setZoom(newZoom);
     setPanX(centerX);
     setPanY(centerY);
