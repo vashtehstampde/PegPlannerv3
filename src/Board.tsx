@@ -369,10 +369,10 @@ export function Board({
           <div
             className="board-surface"
             style={{
-            backgroundImage: `url(./assets/textures/${material}.png?v=3)`,
-            backgroundSize: `${36 * zoom}px ${36 * zoom}px`,
-        }}
-        />
+              backgroundImage: `url(./assets/textures/${material}.png?v=3)`,
+              backgroundSize: `${36 * zoom}px ${36 * zoom}px`,
+            }}
+          />
 
           <div className="holes-layer">
             {holes.map((h, i) => (
