@@ -47,25 +47,27 @@ function App() {
   const boardHIn = boardSize.h * 12;
   const PPI_BASE = 72;
 
+  // ─── Fit to window ───
   const fitToWindow = useCallback(() => {
     const area = document.querySelector('.canvas-area') as HTMLElement;
     if (!area) return;
 
-    const PADDING = 32;
-    const contentWidth = area.clientWidth - (PADDING * 2);
-    const contentHeight = area.clientHeight - (PADDING * 2);
+    // clientWidth/clientHeight already EXCLUDE padding
+    const availW = area.clientWidth;
+    const availH = area.clientHeight;
 
     const fitZoom = Math.min(
-      contentWidth / (boardWIn * PPI_BASE),
-      contentHeight / (boardHIn * PPI_BASE)
+      availW / (boardWIn * PPI_BASE),
+      availH / (boardHIn * PPI_BASE)
     );
 
     const newZoom = clamp(fitZoom, 0.15, 5);
     const boardPxW = boardWIn * PPI_BASE * newZoom;
     const boardPxH = boardHIn * PPI_BASE * newZoom;
 
-    const centerX = PADDING + (contentWidth - boardPxW) / 2;
-    const centerY = PADDING + (contentHeight - boardPxH) / 2;
+    // Center within the available space (no padding math needed)
+    const centerX = (availW - boardPxW) / 2;
+    const centerY = (availH - boardPxH) / 2;
 
     setZoom(newZoom);
     setPanX(centerX);
