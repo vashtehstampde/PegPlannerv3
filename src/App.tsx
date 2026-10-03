@@ -65,12 +65,12 @@ function App() {
     const boardPxW = boardWIn * PPI_BASE * newZoom;
     const boardPxH = boardHIn * PPI_BASE * newZoom;
 
-    const x = PADDING + (contentWidth - boardPxW) / 2;
-    const y = PADDING + (contentHeight - boardPxH) / 2;
+    const centerX = (area.clientWidth - boardPxW) / 2;
+    const centerY = (area.clientHeight - boardPxH) / 2;
 
     setZoom(newZoom);
-    setPanX(x);
-    setPanY(y);
+    setPanX(centerX);
+    setPanY(centerY);
   }, [boardWIn, boardHIn]);
   // Auto-fit on board size change
   useEffect(() => {
