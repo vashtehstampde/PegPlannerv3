@@ -493,7 +493,7 @@ select:focus {
   overflow: hidden;
   background: var(--bg-canvas);
   position: relative;
-  padding: 32px;
+  padding: 0;
   cursor: grab;
 }
 
