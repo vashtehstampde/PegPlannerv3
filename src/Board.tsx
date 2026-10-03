@@ -357,7 +357,7 @@ export function Board({
           <div
             className="board-surface"
             style={{
-              backgroundImage: `url(/assets/textures/${material}.png?v=3)`,
+              backgroundImage: `url(./assets/textures/${material}.png?v=3)`,
             }}
           />
 
